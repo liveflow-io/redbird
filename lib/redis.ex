@@ -21,7 +21,7 @@ defmodule Redbird.Redis do
 
   def setex(%{key: key, value: value, seconds: seconds}) do
     pid()
-    |> Redix.command(["SETEX", key, seconds, value])
+    |> Redix.command(["SET", key, value, "EX", seconds])
     |> case do
       {:ok, "OK"} -> :ok
       {:error, error} -> error
